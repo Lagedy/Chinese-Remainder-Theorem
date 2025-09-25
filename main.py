@@ -158,5 +158,7 @@ for i in range(st.session_state.num_congruences):
     congruences.append((int(a), int(n)))
 
 if st.button("Run Calculator"):
-    result = ChineseRemainderTheorem(congruences)
+    int_congruences = [(int(a), int(n)) for a, n in congruences if a and n]
+    result = ChineseRemainderTheorem(int_congruences)
     st.markdown(f"x = {int(result[0])} mod {result[1]}")
+
