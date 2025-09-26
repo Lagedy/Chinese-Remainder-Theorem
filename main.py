@@ -103,7 +103,10 @@ def ChineseRemainderTheorem(list):
 
         
         new_list = Reducing_mods(new_mods)
-        return ChineseRemainderTheorem(new_list)
+        if type(new_list) == str:
+            return new_list
+        else:
+            return ChineseRemainderTheorem(new_list)
         
                     
                                 
