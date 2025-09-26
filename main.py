@@ -49,24 +49,22 @@ def Reducing_mods(new_mods):
                                     new_mods.pop(j)
                                     return Reducing_mods(new_mods)
                                 else:
-                                    return "Contradiction1"
+                                    return f"Contradiction: {new_mods[i][0]} mod {new_mods[j][1]} does not equal {new_mods[j][0]}"
                             if first_mod_factorisation[prime] < second_mod_factorisation[prime]:
                                 
                                 if mod(new_mods[j][0],new_mods[i][1]) == mod(new_mods[i][0],new_mods[i][1]):
                                     new_mods.pop(i)
                                     return Reducing_mods(new_mods)
                                 else:
-                                    print(new_mods[i])
-                                    print(new_mods[j])
-                                    print(new_mods)
-                                    return "Contradiction2"
+                                    
+                                    return f"Contradiction: {new_mods[j][0]} mod {new_mods[i][1]} does not equal {new_mods[i][0]} mod {new_mods[i][1]}"
 
                             if first_mod_factorisation[prime] == second_mod_factorisation[prime]:
                                 if new_mods[i][0] == new_mods[j][0]:
                                     new_mods.pop(i)
                                     return Reducing_mods(new_mods)
                                 else:
-                                    return "Contradiction3"
+                                    return f"Contradiction: {new_mods[i][0]} mod {new_mods[i][1]} does not equal {new_mods[j][0]} mod {new_mods[j][1]}"
 
     return new_mods
 
@@ -127,13 +125,13 @@ st.text("This is a calculator that can solve simultaneous congruences using chin
 if "num_congruences" not in st.session_state:
     st.session_state.num_congruences = 1
 
-# Button to add a congruence
+
 if st.button("➕ Add Congruence"):
     st.session_state.num_congruences += 1
 
 congruences = []
 
-# Render congruences
+
 for i in range(st.session_state.num_congruences):
     col1, col2, col3 = st.columns([2,1,2])
 
@@ -160,6 +158,10 @@ for i in range(st.session_state.num_congruences):
 if st.button("Run Calculator"):
     int_congruences = [(int(a), int(n)) for a, n in congruences if a and n]
     result = ChineseRemainderTheorem(int_congruences)
-    st.markdown(f"x = {int(result[0])} mod {result[1]}")
+    if type(result) == str:
+        st.error(result)
+
+    else:
+        st.markdown(f"x = {int(result[0])} mod {result[1]}")
 
 
