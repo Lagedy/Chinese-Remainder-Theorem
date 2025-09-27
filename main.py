@@ -49,7 +49,7 @@ def Reducing_mods(new_mods):
                                     new_mods.pop(j)
                                     return Reducing_mods(new_mods)
                                 else:
-                                    return f"Contradiction: {new_mods[i][0]} mod {new_mods[j][1]} does not equal {new_mods[j][0]}"
+                                    return f"Contradiction: {new_mods[i][0]} mod {new_mods[j][1]} does not equal {new_mods[j][0]} mod {new_mods[j][1]}"
                             if first_mod_factorisation[prime] < second_mod_factorisation[prime]:
                                 
                                 if mod(new_mods[j][0],new_mods[i][1]) == mod(new_mods[i][0],new_mods[i][1]):
